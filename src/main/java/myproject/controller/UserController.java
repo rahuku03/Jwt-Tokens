@@ -1,9 +1,10 @@
-package murraco.controller;
+package myproject.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,13 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
-import murraco.dto.AuthenticationToken;
-import murraco.dto.UserAuthentication;
-import murraco.dto.UserDataDTO;
-import murraco.dto.UserResponseDTO;
-import murraco.model.User;
-import murraco.service.UserService;
+import myproject.dto.AuthenticationToken;
+import myproject.dto.UserAuthentication;
+import myproject.dto.UserDataDTO;
+import myproject.dto.UserResponseDTO;
+import myproject.exception.CustomException;
+import myproject.model.User;
+import myproject.service.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -61,8 +63,24 @@ public class UserController {
       @ApiResponse(code = 400, message = "Something went wrong"), //
       @ApiResponse(code = 403, message = "Access denied"), //
       @ApiResponse(code = 422, message = "Username is already in use")})
-  public String signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {
+  public String signup(@ApiParam("Signup User") @RequestBody UserDataDTO user,HttpServletRequest req) {
+	  
+	  
+	  String contractId="";
+	
+	  if(req.getParameter("contractId")==null) {
+		  contractId="";
+	  }else {
+		  contractId=req.getParameter("contractId");
+	  }
+	
+	 if(!contractId.equals("XXXYYYZZZ")) {
+		throw new CustomException("You are not allowed to signup! Ask your adminsitrator", HttpStatus.UNPROCESSABLE_ENTITY);
+	 }
+	  
+	 else {
     return userService.signup(modelMapper.map(user, User.class));
+	 }
   }
 
   @DeleteMapping(value = "/{username}")

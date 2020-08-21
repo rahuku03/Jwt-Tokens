@@ -1,4 +1,4 @@
-package murraco.dto;
+package myproject.dto;
 
 public class AuthenticationToken {
 

@@ -1,4 +1,4 @@
-package murraco.exception;
+package myproject.exception;
 
 import java.io.IOException;
 import java.util.Map;
@@ -23,7 +23,9 @@ public class GlobalExceptionHandlerController {
     return new DefaultErrorAttributes() {
       @Override
       public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
-        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
+    //    Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
+       
+        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, false);
         errorAttributes.remove("exception");
         return errorAttributes;
       }

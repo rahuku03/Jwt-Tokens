@@ -1,4 +1,4 @@
-package murraco.model;
+package myproject.model;
 
 import java.util.List;
 
