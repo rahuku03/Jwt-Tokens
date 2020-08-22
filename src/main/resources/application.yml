@@ -35,3 +35,5 @@ UserController:
   delete: Deletes specific user by username
   search: Returns specific user by username
   me: Returns current user's data
+  
+ClientId: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQyIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNTk4MDgxMjM5LCJleHAiOjE1OTgwODE1Mzl9.9rkHPZLakNjKFWhb-pOOPRGql8soNgMUcn2aE6z_QQY
