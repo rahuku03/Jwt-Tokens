@@ -1,5 +1,7 @@
 package myproject.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,28 @@ public class UserService {
     }
     return user;
   }
+  
+  
+  public List<User> searchAll(){
+	  
+	   List<User> user = userRepository.findAll();
+	   System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+	   
+	   for(User us:user) {
+		   
+		   System.out.println(":::::::::::::::::::: "+us.getUsername());
+		   
+	   }
+	   
+	    if (user == null) {
+	      throw new CustomException("No users exist", HttpStatus.NOT_FOUND);
+	    }
+	    return user;
+	  
+  }
+  
+  
+  
 
   public User whoami(HttpServletRequest req) {
     return userRepository.findByUsername(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req)));

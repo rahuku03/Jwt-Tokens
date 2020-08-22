@@ -1,5 +1,7 @@
 package myproject.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +16,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
   @Transactional
   void deleteByUsername(String username);
+  
+  
+  public List<User> findAll();
 
 }

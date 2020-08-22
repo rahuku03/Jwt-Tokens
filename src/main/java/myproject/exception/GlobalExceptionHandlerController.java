@@ -10,6 +10,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -47,4 +48,10 @@ public class GlobalExceptionHandlerController {
     res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
   }
 
+  @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+  public void handleMediaTypeNotSupportedOrBlankInput(HttpServletResponse res)throws IOException {
+	  res.sendError(HttpStatus.BAD_REQUEST.value(), "Username and Password cannot be blank and Content type should be 'application/x-www-form-urlencoded' 	");
+	  
+  }
+  
 }
